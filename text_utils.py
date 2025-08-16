@@ -11,6 +11,9 @@ def clean_terminal_output(text: str) -> str:
     ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
     text = ansi_escape.sub('', text)
     
+    # Дополнительная очистка цветовых кодов
+    text = re.sub(r'\[0[0-9];[0-9][0-9]m', '', text)  # [01;32m, [01;34m и т.д.
+    
     # Удаляем все управляющие последовательности с квадратными скобками
     text = re.sub(r'\x1B\[[0-9;?]*[a-zA-Z]', '', text)  # Все ESC[ последовательности
     text = re.sub(r'\[\?[0-9]+[hl]', '', text)  # Режимы терминала без ESC

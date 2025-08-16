@@ -27,7 +27,10 @@ class Config:
     DANGEROUS_COMMANDS: Set[str] = {
         "rm -rf", "sudo rm", "chmod 777", "mkfs", "dd if=", 
         ":(){ :|:& };:", "sudo chmod", "sudo chown", "format",
-        "fdisk", "cfdisk", "parted", "wipefs", "shred"
+        "fdisk", "cfdisk", "parted", "wipefs", "shred",
+        "wget ", "curl ", "| bash", "| sh", "> /dev/", 
+        "echo > ", "cat > /", "nc -", "netcat", ">/dev/tcp",
+        "> /etc/", "> /usr/", "> /bin/", "> /sbin/", "> /var/log/"
     }
     
     # Системные команды требующие подтверждения

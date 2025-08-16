@@ -6,12 +6,7 @@ After=network.target
 Type=simple
 User=kegon
 WorkingDirectory=/mnt/d/bot_telegram_trminal_logs
-Environment=PATH=/mnt/d/bot_telegram_trminal_logs/venv/bin:/usr/local/bin:/usr/bin:/bin
-ExecStartPre=/bin/bash -c 'cd /mnt/d/bot_telegram_trminal_logs && python3 -m venv venv'
-ExecStartPre=/bin/bash -c 'cd /mnt/d/bot_telegram_trminal_logs && ./venv/bin/pip install -q -r requirements.txt'
-ExecStartPre=/bin/bash -c 'mkdir -p /mnt/d/bot_telegram_trminal_logs/logs'
-ExecStartPre=/bin/bash -c 'tmux has-session -t claude 2>/dev/null || SHELL=/bin/bash tmux new-session -d -s claude -c /mnt/d/bot_telegram_trminal_logs'
-ExecStart=/bin/bash -c 'cd /mnt/d/bot_telegram_trminal_logs && source venv/bin/activate && python bot.py'
+ExecStart=/mnt/d/bot_telegram_trminal_logs/start.sh
 Restart=always
 RestartSec=10
 StandardOutput=append:/mnt/d/bot_telegram_trminal_logs/logs/bot.log
