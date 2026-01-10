@@ -1,0 +1,16 @@
+[Unit]
+Description=Telegram Terminal Bot
+After=network.target
+
+[Service]
+Type=simple
+User=kegon
+WorkingDirectory=/mnt/d/bot_telegram_trminal_logs
+ExecStart=/mnt/d/bot_telegram_trminal_logs/start.sh
+Restart=always
+RestartSec=10
+StandardOutput=append:/mnt/d/bot_telegram_trminal_logs/logs/bot.log
+StandardError=append:/mnt/d/bot_telegram_trminal_logs/logs/bot_error.log
+
+[Install]
+WantedBy=multi-user.target
