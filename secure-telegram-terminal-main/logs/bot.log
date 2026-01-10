@@ -1,0 +1,117 @@
+2026-01-07 23:42:50,646 - telegram_bot - INFO - Бот инициализирован
+2026-01-07 23:42:50,688 - telegram_bot - INFO - 🤖 Бот запущен и готов к работе
+2026-01-07 23:42:52,335 - telegram_bot - ERROR - HTTP ошибка при отправке уведомления: 401
+2026-01-07 23:42:52,336 - telegram_bot - ERROR - Критическая ошибка: The token `7630995242:AAEIKCuBIgJBmQImQeRf54tUqCzSTXN6STc` was rejected by the server.
+Traceback (most recent call last):
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 729, in initialize
+    await self.get_me()
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 1704, in get_me
+    return await super().get_me(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 519, in decorator
+    result = await func(self, *args, **kwargs)  # skipcq: PYL-E1102
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 769, in get_me
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 607, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 347, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 635, in _do_post
+    return await request.post(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/request/_baserequest.py", line 168, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/request/_baserequest.py", line 323, in _request_wrapper
+    raise InvalidToken(message)
+telegram.error.InvalidToken: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/secure-telegram-terminal-main/secure-telegram-terminal-main/bot.py", line 706, in run
+    app.run_polling(drop_pending_updates=True)
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_application.py", line 779, in run_polling
+    return self.__run(
+           ^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_application.py", line 967, in __run
+    raise exc
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_application.py", line 956, in __run
+    loop.run_until_complete(self.initialize())
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_application.py", line 467, in initialize
+    await self.bot.initialize()
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 293, in initialize
+    await super().initialize()
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 731, in initialize
+    raise InvalidToken(f"The token `{self._token}` was rejected by the server.") from exc
+telegram.error.InvalidToken: The token `7630995242:AAEIKCuBIgJBmQImQeRf54tUqCzSTXN6STc` was rejected by the server.
+2026-01-07 23:42:52,339 - telegram_bot - INFO - Уведомление о запуске отправлено
+2026-01-07 23:42:52,356 - telegram_bot - ERROR - Критическая ошибка при запуске: The token `7630995242:AAEIKCuBIgJBmQImQeRf54tUqCzSTXN6STc` was rejected by the server.
+Traceback (most recent call last):
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 729, in initialize
+    await self.get_me()
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 1704, in get_me
+    return await super().get_me(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 519, in decorator
+    result = await func(self, *args, **kwargs)  # skipcq: PYL-E1102
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 769, in get_me
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 607, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 347, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 635, in _do_post
+    return await request.post(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/request/_baserequest.py", line 168, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/request/_baserequest.py", line 323, in _request_wrapper
+    raise InvalidToken(message)
+telegram.error.InvalidToken: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/secure-telegram-terminal-main/secure-telegram-terminal-main/bot.py", line 735, in main
+    bot.run()
+  File "/mnt/d/secure-telegram-terminal-main/secure-telegram-terminal-main/bot.py", line 706, in run
+    app.run_polling(drop_pending_updates=True)
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_application.py", line 779, in run_polling
+    return self.__run(
+           ^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_application.py", line 967, in __run
+    raise exc
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_application.py", line 956, in __run
+    loop.run_until_complete(self.initialize())
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_application.py", line 467, in initialize
+    await self.bot.initialize()
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 293, in initialize
+    await super().initialize()
+  File "/home/kegon/.local/lib/python3.12/site-packages/telegram/_bot.py", line 731, in initialize
+    raise InvalidToken(f"The token `{self._token}` was rejected by the server.") from exc
+telegram.error.InvalidToken: The token `7630995242:AAEIKCuBIgJBmQImQeRf54tUqCzSTXN6STc` was rejected by the server.
+2026-01-07 23:42:52,375 - telegram_bot - ERROR - Ошибка отправки уведомления: cannot schedule new futures after interpreter shutdown
+2026-01-07 23:42:52,379 - telegram_bot - INFO - Уведомление об ошибке отправлено
+2026-01-07 23:48:54,150 - telegram_bot - INFO - Бот инициализирован
+2026-01-07 23:48:54,198 - telegram_bot - INFO - 🤖 Бот запущен и готов к работе
+2026-01-07 23:48:54,471 - telegram_bot - INFO - Уведомление отправлено успешно
+2026-01-07 23:48:54,474 - telegram_bot - INFO - Уведомление о запуске отправлено
+2026-01-07 23:49:42,052 - telegram_bot - INFO - Получена команда /start от пользователя 309993483 в чате 309993483
+2026-01-07 23:49:42,056 - telegram_bot - INFO - Отправка сообщения с кнопками пользователю 309993483
+2026-01-07 23:49:42,427 - telegram_bot - INFO - Сообщение с кнопками успешно отправлено пользователю 309993483
