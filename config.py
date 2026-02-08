@@ -12,9 +12,20 @@ class Config:
     # Tmux настройки
     TMUX_SESSION = os.getenv("TMUX_SESSION", "claude")
     COMMAND_TIMEOUT = int(os.getenv("COMMAND_TIMEOUT", "30"))
+
+    # Сетевые таймауты Telegram API (сек)
+    TELEGRAM_CONNECT_TIMEOUT = float(os.getenv("TELEGRAM_CONNECT_TIMEOUT", "20"))
+    TELEGRAM_READ_TIMEOUT = float(os.getenv("TELEGRAM_READ_TIMEOUT", "30"))
+    TELEGRAM_WRITE_TIMEOUT = float(os.getenv("TELEGRAM_WRITE_TIMEOUT", "30"))
+    TELEGRAM_POOL_TIMEOUT = float(os.getenv("TELEGRAM_POOL_TIMEOUT", "10"))
+
+    # Повторные попытки запуска при сетевых ошибках
+    RETRY_MAX = int(os.getenv("RETRY_MAX", "10"))  # 0 или меньше = бесконечно
+    RETRY_BASE_DELAY = int(os.getenv("RETRY_BASE_DELAY", "5"))
+    RETRY_MAX_DELAY = int(os.getenv("RETRY_MAX_DELAY", "60"))
     
     # Логирование
-    LOG_FILE = os.getenv("LOG_FILE", "logs/claude_terminal.log")
+    LOG_FILE = os.getenv("LOG_FILE", f"logs/{os.getenv('TMUX_SESSION', 'claude')}_terminal.log")
     BOT_LOG_FILE = os.getenv("BOT_LOG_FILE", "logs/bot.log")
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
     MAX_LOG_SIZE = int(os.getenv("MAX_LOG_SIZE", "10485760"))  # 10MB

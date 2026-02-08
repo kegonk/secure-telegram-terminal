@@ -28,7 +28,14 @@ class BotNotifications:
                 "parse_mode": parse_mode
             }
             
-            async with httpx.AsyncClient(timeout=10) as client:
+            transport = httpx.AsyncHTTPTransport(local_address="0.0.0.0")
+            timeout = httpx.Timeout(
+                connect=Config.TELEGRAM_CONNECT_TIMEOUT,
+                read=Config.TELEGRAM_READ_TIMEOUT,
+                write=Config.TELEGRAM_WRITE_TIMEOUT,
+                pool=Config.TELEGRAM_POOL_TIMEOUT
+            )
+            async with httpx.AsyncClient(timeout=timeout, transport=transport) as client:
                 response = await client.post(url, json=data)
                 
                 if response.status_code == 200:
@@ -44,7 +51,7 @@ class BotNotifications:
                     return False
                     
         except Exception as e:
-            bot_logger.error(f"Ошибка отправки уведомления: {e}")
+            bot_logger.error(f"Ошибка отправки уведомления: {type(e).__name__}: {e}")
             return False
     
     async def send_startup_notification(self):
