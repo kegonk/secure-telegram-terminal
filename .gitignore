@@ -1,15 +1,27 @@
-# Environment
+# Environment / secrets
 .env
+.env.*
 
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
 
-# Virtual environment
-venv/
-
-# Logs
+# Logs / runtime
 logs/
+*.log
+command_history.json
+
+# Virtualenv
+venv/
+.venv/
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
 
 # OS
 .DS_Store
