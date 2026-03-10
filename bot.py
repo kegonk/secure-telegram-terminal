@@ -622,7 +622,7 @@ class TelegramTerminalBot:
 • Всего команд: {user_stats['total']}
 • Успешных: {user_stats['success']}
 • С ошибками: {user_stats['failed']}
-• Ваша успешность: {user_stats['success_rate']:.1f}%
+• Ваша успешность: {float(user_stats.get('success_rate', 0.0)):.1f}%
 
 🔥 **Популярные команды:**"""
 

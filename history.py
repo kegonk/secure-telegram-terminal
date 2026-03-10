@@ -81,7 +81,7 @@ class CommandHistory:
         user_commands = [cmd for cmd in self.history if cmd['user_id'] == user_id]
         
         if not user_commands:
-            return {'total': 0, 'success': 0, 'failed': 0}
+            return {'total': 0, 'success': 0, 'failed': 0, 'success_rate': 0.0}
             
         total = len(user_commands)
         success = sum(1 for cmd in user_commands if cmd['success'])
