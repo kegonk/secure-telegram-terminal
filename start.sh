@@ -17,12 +17,6 @@ if ! command -v python3 &> /dev/null; then
     exit 1
 fi
 
-# Проверяем наличие pip
-if ! command -v pip3 &> /dev/null; then
-    echo "❌ pip3 не установлен!"
-    exit 1
-fi
-
 # Проверяем файл .env
 if [ ! -f ".env" ]; then
     echo "❌ Файл .env не найден!"
@@ -36,19 +30,50 @@ fi
 mkdir -p logs
 mkdir -p data
 
+# Если venv поврежден (например, после неудачного создания), пересоздаем его
+if [ -d "venv" ] && [ ! -f "venv/bin/activate" ]; then
+    echo "⚠️ Найдено поврежденное виртуальное окружение. Пересоздание..."
+    rm -rf venv
+fi
+
 # Создаем виртуальное окружение если его нет
 if [ ! -d "venv" ]; then
     echo "🔧 Создание виртуального окружения..."
-    python3 -m venv venv
+    if ! python3 -m venv venv; then
+        echo "❌ Не удалось создать venv."
+        echo "Установите пакет python3-venv и повторите запуск:"
+        echo "sudo apt install python3-venv"
+        exit 1
+    fi
 fi
 
 # Активируем виртуальное окружение
 echo "🔧 Активация виртуального окружения..."
+if [ ! -f "venv/bin/activate" ]; then
+    echo "❌ Виртуальное окружение повреждено (нет venv/bin/activate)."
+    echo "Удалите папку venv и запустите скрипт снова."
+    exit 1
+fi
 source venv/bin/activate
 
-# Устанавливаем зависимости
-echo "📦 Установка зависимостей..."
-pip install -r requirements.txt
+# Устанавливаем зависимости только при первом запуске или изменении requirements.txt
+REQ_HASH_FILE="venv/.requirements.sha256"
+REQ_HASH=$(sha256sum requirements.txt | awk '{print $1}')
+INSTALLED_REQ_HASH=""
+if [ -f "$REQ_HASH_FILE" ]; then
+    INSTALLED_REQ_HASH=$(cat "$REQ_HASH_FILE")
+fi
+if [ "$REQ_HASH" != "$INSTALLED_REQ_HASH" ]; then
+    echo "📦 Установка зависимостей..."
+    if ! python3 -m pip install -r requirements.txt; then
+        echo "❌ Не удалось установить зависимости."
+        echo "Проверьте доступ к сети и наличие pip в Python."
+        exit 1
+    fi
+    echo "$REQ_HASH" > "$REQ_HASH_FILE"
+else
+    echo "✅ Зависимости актуальны, установка не требуется"
+fi
 
 # Проверяем tmux сессию
 TMUX_SESSION="claude"
@@ -93,4 +118,4 @@ echo "✅ Логирование настроено: logs/${TMUX_SESSION}_termin
 
 # Запускаем бота
 echo "🚀 Запуск бота..."
-python bot.py
+python3 bot.py

@@ -14,6 +14,10 @@ if [ ! -f ".env" ]; then
     exit 1
 fi
 
+# Создаем директории, которые нужны systemd для append-логов
+mkdir -p logs
+mkdir -p data
+
 # Создаем systemd сервис
 echo "🔧 Создание systemd сервиса..."
 cat > telegram-terminal-bot.service << EOF
@@ -25,11 +29,12 @@ After=network.target
 Type=simple
 User=$CURRENT_USER
 WorkingDirectory=$PROJECT_PATH
+ExecStartPre=/usr/bin/mkdir -p $PROJECT_PATH/logs $PROJECT_PATH/data
 ExecStart=$PROJECT_PATH/start.sh
 Restart=always
 RestartSec=10
-StandardOutput=append:$PROJECT_PATH/logs/bot.log
-StandardError=append:$PROJECT_PATH/logs/bot_error.log
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target

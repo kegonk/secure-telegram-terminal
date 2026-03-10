@@ -1103,11 +1103,8 @@ class TelegramTerminalBot:
                 for sig in [signal.SIGINT, signal.SIGTERM]:
                     signal.signal(sig, self.signal_handler)
 
-                try:
-                    loop = asyncio.get_event_loop()
-                except RuntimeError:
-                    loop = asyncio.new_event_loop()
-                    asyncio.set_event_loop(loop)
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
                 loop.run_until_complete(self._ensure_tmux_session())
                 bot_logger.info("🤖 Бот запущен и готов к работе")
 

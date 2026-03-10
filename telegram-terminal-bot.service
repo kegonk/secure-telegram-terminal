@@ -5,12 +5,13 @@ After=network.target
 [Service]
 Type=simple
 User=kegon
-WorkingDirectory=/mnt/d/bot_telegram_trminal_logs
-ExecStart=/mnt/d/bot_telegram_trminal_logs/start.sh
+WorkingDirectory=/home/kegon/prog/secure-telegram-terminal
+ExecStartPre=/usr/bin/mkdir -p /home/kegon/prog/secure-telegram-terminal/logs /home/kegon/prog/secure-telegram-terminal/data
+ExecStart=/home/kegon/prog/secure-telegram-terminal/start.sh
 Restart=always
 RestartSec=10
-StandardOutput=append:/mnt/d/bot_telegram_trminal_logs/logs/bot.log
-StandardError=append:/mnt/d/bot_telegram_trminal_logs/logs/bot_error.log
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
